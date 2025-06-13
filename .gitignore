@@ -2,9 +2,6 @@ node_modules
 .DS_Store
 dist
 *.local
-index.html
+.vite-inspect
 .remote-assets
 components.d.ts
-# ignore node_modules symlink
-node_modules
-node_modules.nosync

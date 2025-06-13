@@ -1,6 +1,11 @@
-# Clases para el curso IIC1103 - 2023
-**Semestre 2**
+# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
 
-Este es el material utilizado para el curso IIC1103 sección 12, dictada por mí, Nicolás Quiroz.
+To start the slide show:
 
-Cualquier uso de este material debe ser autorizado previamente por mí.
+- `pnpm install`
+- `pnpm dev`
+- visit <http://localhost:3030>
+
+Edit the [slides.md](./slides.md) to see the changes.
+
+Learn more about Slidev at the [documentation](https://sli.dev/).
