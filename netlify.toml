@@ -16,6 +16,6 @@ to = "/index.html"
 status = 200
 
 [[redirects]]
-from = "/:clase"
-to = "/:clase/index.html"
+from = "/:splat"
+to = "/:splat/index.html"
 status = 200
