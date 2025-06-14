@@ -19,7 +19,6 @@ hideInToc: true
 download: true
 presenter: dev
 exportFilename: landing
-exportExecutablePath: /tmp/chromium
 ---
 
 # Clases de Programación
