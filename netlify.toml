@@ -22,5 +22,5 @@ status = 200
 
 [[redirects]]
 from = "/clase_01/*"
-to = "/clase_01/index.html"
+to = "/clase_01/index.html/:splat"
 status = 200
