@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "pnpm build-index; for clase in clase_*.md; do slidev build ${clase%%.*}.md --base /${clase%%.*}/ --out dist/${clase%%.*}; done",
+    "build": " pnpm exec playwright install pnpm build-index; for clase in clase_*.md; do slidev build ${clase%%.*}.md --base /${clase%%.*}/ --out dist/${clase%%.*}; done",
     "build-index": "slidev build index.md --base / --out dist",
     "dev": "slidev",
     "present": "echo Password;read passwd; slidev --remote=$passwd",
