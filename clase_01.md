@@ -20,6 +20,7 @@ hideInToc: true
 download: true
 presenter: dev
 exportFilename: clase_01
+exportExecutablePath: /tmp/chromium
 
 addons:
   - slidev-addon-python-runner
