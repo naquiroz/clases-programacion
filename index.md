@@ -24,4 +24,8 @@ exportFilename: landing
 # Clases de Programación
 ## Lista de clases
 
-- [Clase 01 - Introducción](/clase_01)
+<ul class="list">
+  <li>
+    <a href="/clase_01">Clase 01 - Introducción</a>
+  </li>
+</ul>
