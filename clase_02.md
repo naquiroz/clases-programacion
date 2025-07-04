@@ -508,7 +508,7 @@ hideInToc: false
 
 # Solución
 
-```python {1-15|16-**30**}{lines:true, maxHeight: '300px'}
+```python {1-15|16-30}{lines:true, maxHeight: '300px'}
 # Primer gasto
 print("Ingrese los datos del primer gasto:")
 centro_costos1 = input("Centro de costos: ")
@@ -549,10 +549,9 @@ hideInToc: true
 
 # Coming soon...
 
-En el último ejemplo, usamos un `while` para iterar sobre los jugadores, y otro `while` para iterar sobre las ofertas de cada jugador. Esto es un ejemplo de un ciclo anidado, que es un ciclo dentro de otro ciclo. Pero, ¿no sabíamos exactamente cuántas veces se iba a repetir el ciclo?
-¿Es necesario repetir el ciclo infinitamente hasta que se cumpla la condición de término? ¿No podemos repetirlo un número específico de veces?
+En el último ejemplo,  preguntamos dos veces por el monto de los gastos, y luego preguntamos por la persona que rinde. Qué pasa si queremos preguntar estas cosas una sola vez?
 
-Para eso el `for`, que comenzaremos a ver en la próxima clase.
+Para eso sirve el `while`, que comenzaremos a ver en la próxima clase.
 
 ---
 layout: default
