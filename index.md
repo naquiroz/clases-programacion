@@ -28,4 +28,7 @@ exportFilename: landing
   <li>
     <a href="/clase_01">Clase 01 - Introducción</a>
   </li>
+  <li>
+    <a href="/clase_02">Clase 02 - Condicionales</a>
+  </li>
 </ul>

@@ -70,7 +70,7 @@ hideInToc: false
 
 Recuerdan el ejercicio de la clase 01 de blockly?
 
-❗ Primero el “jugador” observaba que tenía en su costado izquierdo. Luego, dependiendo de lo que tenía, hacía una acción.
+❗ Primero el "jugador" observaba que tenía en su costado izquierdo. Luego, dependiendo de lo que tenía, hacía una acción.
 
 ❗Si lo escribiéramos en ingles sería algo así:
 
@@ -150,7 +150,7 @@ hideInToc: false
 - Que el usuario haya ingresado un número par.
 - Que el usuario haya ingresado un número impar.
 - Que el usuario haya ingresado un número mayor que 10.
-- Que el texto ingresado por el usuario sea `"hola"`.
+- Que el texto ingresado por el usuario sea "hola".
 - Que el resultado de sumar dos números sea mayor que un numero
 - Que el resultado de unir strings sea igual a otro string
 </v-clicks>
@@ -162,7 +162,7 @@ title: If - condiciones tabla
 hideInToc: true
 ---
 
-**Recordar** que en la [clase 01](/clase_01) vimos los operadores de comparación, todos ellos entregan un valor booleano. Más adelante veremos otras _“cosas”_ que también entregan un valor booleano.
+**Recordar** que en la [clase 01](/clase_01) vimos los operadores de comparación, todos ellos entregan un valor booleano. Más adelante veremos otras "_cosas_" que también entregan un valor booleano.
 
 | Operación | Descripción | Ejemplo | Resultado |
 | --------- | ----------- | ------- | --------- |
@@ -422,7 +422,7 @@ else:
 ```
 
 ---
-layout: default
+layout: two-cols
 level: 2
 title: Ejemplo avanzado
 hideInToc: false
@@ -430,13 +430,74 @@ hideInToc: false
 
 # Ejemplo avanzado
 
-Eres un periodista que está escribiendo un artículo sobre J. Robert Oppenheimer y la creación de la bomba atómica. Durante tu investigación, decides hacer algunos cálculos relacionados con los eventos históricos.
+Eres un programador de **Xpendit**, una plataforma de rendición de gastos empresariales. Tu tarea es implementar la lógica que determina a qué **flujo de aprobación** debe enviarse cada gasto, según ciertas reglas de negocio.
 
-1. Pregunte al usuario sobre cuántos años Oppenheimer enseñó en la Universidad de California. Debes imprimir un mensaje que pregunte: "Responde a las siguientes preguntas basadas en la vida y carrera de J. Robert Oppenheimer:"
-2. Pregunte al usuario sobre cuántos años Oppenheimer enseñó en caltech.
-3. Si la suma de los años entregados es exactamente 8, debes decir "Estudios correctos". luego, se te pedirá que indiques la energía (en joules) liberada por cada bomba atómica. Puedes asumir que es un número entero. También se te entregará el número de bombas atómicas lanzadas.
-4. Si los años no suman 8, deberás decir "Incorrecto en la primera pregunta. Oppenheimer enseñó un total de 8 años entre ambas instituciones."
-5. Finalmente, si la energía total lanzada equivale justo a 400000 deberás decir "Wow, mucha energía." De lo contrario, deberás decir "Esto no es una bomba atómica. Buuuu"
+En Xpendit existen **tres flujos de aprobación**:
+
+1. **Flujo "Directo Gerencia"**:
+   - Centro de costos: "Marketing"
+   - Categoría: "Publicidad"
+   - Monto: mayor o igual a $1.000.000
+   - Persona que rinde: cualquier persona
+
+::right::
+
+2. **Flujo "Aprobación Finanzas"**:
+   - Centro de costos: "Operaciones"
+   - Monto: menor a $500.000
+   - Persona que rinde: "Juan Pérez" o "María López"
+
+3. **Flujo "Aprobación Jefatura"**:
+   - Categoría: "Viajes"
+
+Tu programa debe pedir los datos de **dos gastos distintos** (centro de costos, categoría, monto y persona que lo rinde) y, para cada uno, imprimir el nombre del flujo de aprobación que le corresponde. Puedes asumir que siempre alguno de los tres flujos aplica.
+
+---
+layout: two-cols
+level: 2
+title: Ejemplo de entrada y salida
+hideInToc: true
+---
+
+### Ejemplo de entrada y salida
+
+```text
+Centro de costos: Marketing
+Categoría: Publicidad
+Monto: 1500000
+Persona que rinde: Ana Torres
+
+Centro de costos: Operaciones
+Categoría: Insumos
+Monto: 300000
+Persona que rinde: Juan Pérez
+```
+
+```text
+El flujo para el primer gasto es: Directo Gerencia
+El flujo para el segundo gasto es: Aprobación Finanzas
+```
+
+::right::
+
+Otro ejemplo:
+
+```text
+Centro de costos: Ventas
+Categoría: Viajes
+Monto: 200000
+Persona que rinde: María López
+
+Centro de costos: Marketing
+Categoría: Viajes
+Monto: 800000
+Persona que rinde: Pedro Soto
+```
+
+```text
+El flujo para el primer gasto es: Aprobación Jefatura
+El flujo para el segundo gasto es: Aprobación Jefatura
+```
 
 ---
 layout: default
@@ -445,30 +506,38 @@ title: Solución
 hideInToc: false
 ---
 
-## Solución
+# Solución
 
-```python {monaco}{maxHeight: '100px'}
-print("Responde a las siguientes preguntas basadas en la vida y carrera de J. Robert Oppenheimer:")
+```python {1-15|16-**30**}{lines:true, maxHeight: '300px'}
+# Primer gasto
+print("Ingrese los datos del primer gasto:")
+centro_costos1 = input("Centro de costos: ")
+categoria1 = input("Categoría: ")
+monto1 = int(input("Monto: "))
+persona1 = input("Persona que rinde: ")
 
-# Años enseñados en la Universidad de California.
-years_UC = int(input("Años UC: "))
-# Años enseñados en caltech.
-years_caltech = int(input("Años Caltech: "))
 
-if years_UC + years_caltech == 8:
-    print("Estudios correctos")
+# Segundo gasto
+print("Ingrese los datos del segundo gasto:")
+centro_costos2 = input("Centro de costos: ")
+categoria2 = input("Categoría: ")
+monto2 = int(input("Monto: "))
+persona2 = input("Persona que rinde: ")
 
-    # Energía liberada por cada bomba atómica.
-    energia_bomba = int(input("Energía: "))
-    # Número de bombas atómicas lanzadas.
-    numero_bombas = int(input("Numero bombas: "))
+if centro_costos1 == "Marketing" and categoria1 == "Publicidad" and monto1 >= 1000000:
+    print("El flujo para el primer gasto es: Directo Gerencia")
+elif centro_costos1 == "Operaciones" and monto1 < 500000 and (persona1 == "Juan Pérez" or persona1 == "María López"):
+    print("El flujo para el primer gasto es: Aprobación Finanzas")
+elif categoria1 == "Viajes":
+    print("El flujo para el primer gasto es: Aprobación Jefatura")
 
-    if energia_bomba * numero_bombas == 400000:
-        print("Wow, mucha energía.")
-    else:
-        print("Esto no es una bomba atómica. Buuuu")
-else:
-    print("Incorrecto en la primera pregunta. Oppenheimer enseñó un total de 8 años entre ambas instituciones."''
+
+if centro_costos2 == "Marketing" and categoria2 == "Publicidad" and monto2 >= 1000000:
+    print("El flujo para el segundo gasto es: Directo Gerencia")
+elif centro_costos2 == "Operaciones" and monto2 < 500000 and (persona2 == "Juan Pérez" or persona2 == "María López"):
+    print("El flujo para el segundo gasto es: Aprobación Finanzas")
+elif categoria2 == "Viajes":
+    print("El flujo para el segundo gasto es: Aprobación Jefatura")
 ```
 
 ---
@@ -480,10 +549,10 @@ hideInToc: true
 
 # Coming soon...
 
-En el último ejemplo, pudimos preguntar una sola vez por la energía de la bomba atómica, y luego preguntar por el número de bombas atómicas lanzadas. Qué pasa si queremos preguntar por la energía de cada bomba atómica?
-O si queremos preguntar por el número de bombas atómicas lanzadas, y luego por la energía de cada bomba atómica?
+En el último ejemplo, usamos un `while` para iterar sobre los jugadores, y otro `while` para iterar sobre las ofertas de cada jugador. Esto es un ejemplo de un ciclo anidado, que es un ciclo dentro de otro ciclo. Pero, ¿no sabíamos exactamente cuántas veces se iba a repetir el ciclo?
+¿Es necesario repetir el ciclo infinitamente hasta que se cumpla la condición de término? ¿No podemos repetirlo un número específico de veces?
 
-Para eso sirve el `while` y el `for`, que comenzaremos a ver en la próxima clase.
+Para eso el `for`, que comenzaremos a ver en la próxima clase.
 
 ---
 layout: default
