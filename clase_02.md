@@ -796,7 +796,7 @@ Y mostrar los N primeros pares de sumas de gastos de almuerzos ($300) y transpor
 n = int(input())
 contador = 1
 while contador <= n:
-    if (contador * 300 + contador * 500) and contador % 2 == 0:
+    if contador % 2 == 0:
         print(contador * 300, contador * 500)
     else:
         print(contador * 400, contador * 600)
@@ -936,18 +936,15 @@ title: Ejercicio resuelto
 hideInToc: true
 ---
 
-```python {1-4|5-7|8-13|14-17|19-21|23-25|23-29|23-32}{lines: true, maxHeight: '450px'}
+```python {1-4|5-6|7-12|13-15|16-18|20-22|23-26|27-29}{lines: true, maxHeight: '450px'}
 # Pedir la cantidad de áreas a ingresar
 tamano_gasto_kb = 120
 n_areas = int(input("¿Cuántas áreas quieres reportar? "))
 
 total_gastos = 0
 area_num = 1
-primer_area_gastos = 0
 while area_num <= n_areas:
     n_gastos = int(input(f"¿Cuántos gastos tiene el área #{area_num}? "))
-    if area_num == 1:
-        primer_area_gastos = n_gastos
     total_gastos += n_gastos
     area_num += 1
 
@@ -961,11 +958,11 @@ gb_10_kb = 10240 * 1024
 
 if peso_total_kb < gb_1_kb:
     print(f"El peso total del archivo es de {peso_total_kb} KB, se exportará en un solo archivo.")
-    print(f"Archivo exportado con nombre xpendit_informe_{n_areas}_areas_{primer_area_gastos}_gastos.xslx")
+    print(f"Archivo exportado con nombre xpendit_informe_{n_areas}_areas_{total_gastos}_gastos.xslx")
 elif peso_total_kb < gb_10_kb:
     print(f"El peso total del archivo es de {peso_total_kb} KB, lo que supera el límite de 1 GB.")
     correo = input("Por favor, ingresa un correo a donde se enviará el archivo:\nCorreo: ")
-    print(f"Archivo exportado con nombre xpendit_informe_{n_areas}_areas_{primer_area_gastos}_gastos.xslx")
+    print(f"Archivo exportado con nombre xpendit_informe_{n_areas}_areas_{total_gastos}_gastos.xslx")
 else:
     print(f"El peso total del archivo es de {peso_total_kb} KB, lo que supera el límite de 10 GB.")
     print("Por favor, contacta a soporte.")
