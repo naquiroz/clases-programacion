@@ -12,7 +12,7 @@ fonts:
   # use with `font-serif` css class from windicss
   serif: 'Inter,Noto Color Emoji'
   # for code blocks, inline code, etc.
-  mono: 'Fira Code,Noto Color Emoji'
+  mono: 'Hack,Noto Color Emoji'
   weights: '300,700,900'
 layout: intro
 level: 1
@@ -760,43 +760,50 @@ hideInToc: true
 # While
 ## Ejemplos
 
-Un programa que imprima los N primeros múltiplos de 3.
+Un programa que imprima y simule la suma de los N primeros montos de reembolsos mensuales recurrentes de $300 cada uno.
 
 ```python
 n = int(input())
 contador = 1
 while contador <= n:
-    print(contador * 3)
+    print(contador * 300)
     contador += 1
 ```
 
-Y si queremos mostrar los N primeros múltiplos de 3 y 5 simultáneamente?
+Y si queremos mostrar los N primeros pares de sumas de montos de gastos: uno por almuerzos de equipo ($300 cada uno) y otro por transporte ($500 cada uno)?
 
 ```python
 n = int(input())
 contador = 1
 while contador <= n:
-    print(contador * 3, contador * 5)
+    print(contador * 300, contador * 500)
     contador += 1
 ```
 
 ::right::
 
-Y mostrar los N primeros múltiplos de 3 y 5, pero solamente si es que la suma de ambos par —y en caso que no mostrar los múltiplos de 4 y 6?
+Y mostrar los N primeros pares de sumas de gastos de almuerzos ($300) y transporte ($500). Si la cantidad de gastos es par, mostrar ambos; si no, mostrar gastos alternativos: coffee breaks ($400) y estacionamiento ($600)?
 
 ```python
 n = int(input())
 contador = 1
 while contador <= n:
-    if (contador * 3 + contador * 5) % 2 == 0:
-        print(contador * 3, contador * 5)
+    if (contador * 300 + contador * 500) and contador % 2 == 0:
+        print(contador * 300, contador * 500)
     else:
-        print(contador * 4, contador * 6)
+        print(contador * 400, contador * 600)
     contador += 1
 ```
 
-❓ Si queremos mostrar los N primeros múltiplos de 3 y 5, y cuando lleguemos a un numero par (al sumar ambos múltiplos), en vez de imprimir los múltiplos de 3 y 5,
-imprimimos una cuenta regresiva desde ese número (la suma de ambos) hasta el cero, para luego continuar con los siguientes múltiplos de 3 y 5, y mostrar la suma de los múltiplos de 3 al final?
+❓ Ahora supongamos un ejemplo más complejo.
+
+Podríamos querer hacer lo siguiente:
+
+- Trabajar con los N primeros pares de gastos de almuerzos ($300) y transporte ($500).
+- Para cada par, normalmente mostraríamos los montos de ambos gastos.
+- Sin embargo, si la suma de ambos gastos resulta ser un número par, en vez de mostrar los montos, podriamos querer mostrar un proceso de reembolso por ese total, mostrando los descuentos del total por cada parte reembolsada.
+- Luego, continuamos con los siguientes pares de gastos, repitiendo el mismo procedimiento.
+- Al finalizar, mostramos la suma total de los gastos de almuerzos.
 
 Para eso, necesitamos saber variables acumuladoras, y ciclos anidados.
 
@@ -820,26 +827,130 @@ hideInToc: true
 # Variables acumuladoras
 
 A veces, necesitamos guardar datos de forma más compleja: calcular la suma de ciertos números, o bien, el promedio y/o otras operaciones.
-Para eso, necesitamos usar **variables acumuladoras**. Solamente es una forma distinta de llamar a una variable que se usa para acumular datos. Por ejemplo, calcular un promedio de notas hasta que la nota ingresada sea `-1.0`
+Para eso, necesitamos usar **variables acumuladoras**. Solamente es una forma distinta de llamar a una variable que se usa para acumular datos.
 
-```python
-# Obtener la primera nota
-nota = float(input())
+Por ejemplo, calcular un promedio de montos de gastos hasta que el monto ingresado sea `-1.0`
+
+```python {1-2|3-5|6-8|9-11|12-} {lines:true}
+# Obtener el primer monto
+monto = float(input())
 # Inicializar las variables acumuladora
-suma_notas = 0
-cantidad_notas = 0
-# Mientras la nota no sea -1
-while nota != -1:
-    # Acumular la nota
-    suma_notas += nota
-    # Acumular la cantidad de notas
-    cantidad_notas += 1
-    # Obtener la siguiente nota
-    nota = float(input())
+suma_montos = 0
+cantidad_montos = 0
+# Mientras el monto no sea -1
+while monto != -1:
+    # Acumular el monto
+    suma_montos += monto
+    # Acumular la cantidad de montos
+    cantidad_montos += 1
+    # Obtener el siguiente monto
+    monto = float(input())
 # Calcular el promedio
-promedio = suma_notas / cantidad_notas
+promedio = suma_montos / cantidad_montos
 # Mostrar el promedio
 print(promedio)
+```
+
+---
+layout: default
+level: 2
+title: Ejercicio
+hideInToc: true
+---
+
+## Ejercicio
+
+Supón que tienes que generar un archivo de informe de gastos para varias áreas de una empresa.
+
+Cada área tiene varios gastos, y cada gasto tiene un peso de 120 KB.
+
+El programa debe pedir al usuario la cantidad de áreas, luego para cada área la cantidad de gastos. Una vez que se han ingresado todos los gastos de un área, se debe exportar el archivo de reporte de la siguiente manera:
+
+Si el tamaño del archivo es menor a 1 GB (equivalente a 1024 MB o `1024 * 1024 KB`), se debe imprimir que el archivo se generó con el nombre "xpendit_informe_x_areas_x_gastos.xslx"
+Si el tamaño del archivo supera los 1 GB (equivalente a 1024 MB o `1024 * 1024 KB`), se debe avisar al usuario que el archivo es muy grande y deberá pedir un correo a donde se enviará el archivo.
+Si el tamaño del archivo supera los 10 GB (equivalente a 10240 MB o `10240 * 1024 KB`), se debe avisar al usuario que el archivo es demasiado grande y no se puede exportar, y que debe contactar a soporte.
+
+---
+layout: default
+level: 2
+title: Ejercicio
+hideInToc: true
+---
+
+## Ejemplo de entrada y salida:
+
+```text {1|2-3|4|5-6}{lines:true}
+¿Cuántas áreas quieres reportar? 2
+¿Cuántos gastos tiene el área #1? 2
+¿Cuántos gastos tiene el área #2? 2
+Total de gastos: 4
+El peso total del archivo es de 480 KB, se exportará en un solo archivo.
+Archivo exportado con nombre xpendit_informe_2_areas_4_gastos.xslx
+```
+
+```text {1|2-6|7|8-10|11}{lines:true}
+¿Cuántas áreas quieres reportar? 5
+¿Cuántos gastos tiene el área #1? 1000
+¿Cuántos gastos tiene el área #2? 4570
+¿Cuántos gastos tiene el área #3? 1000
+¿Cuántos gastos tiene el área #4? 1345
+¿Cuántos gastos tiene el área #5? 5123
+Total de gastos: 13038
+El peso total del archivo es de 13038 KB, lo que supera el límite de 1 GB.
+Por favor, ingresa un correo a donde se enviará el archivo:
+Correo: juan@acme.com
+Archivo exportado con nombre xpendit_informe_5_areas_13038_gastos.xslx
+```
+
+```text {1|2-3|4|5-6}{lines:true}
+¿Cuántas áreas quieres reportar? 2
+¿Cuántos gastos tiene el área #1? 45875
+¿Cuántos gastos tiene el área #2? 234509867
+Total de gastos: 234555742
+El peso total del archivo es de 28146689040 KB, lo que supera el límite de 10 GB.
+Por favor, contacta a soporte.
+```
+
+---
+layout: default
+level: 2
+title: Ejercicio resuelto
+hideInToc: true
+---
+
+```python {1-4|5-7|8-13|14-17|19-21|23-25|23-29|23-32}{lines: true, maxHeight: '450px'}
+# Pedir la cantidad de áreas a ingresar
+tamano_gasto_kb = 120
+n_areas = int(input("¿Cuántas áreas quieres reportar? "))
+
+total_gastos = 0
+area_num = 1
+primer_area_gastos = 0
+while area_num <= n_areas:
+    n_gastos = int(input(f"¿Cuántos gastos tiene el área #{area_num}? "))
+    if area_num == 1:
+        primer_area_gastos = n_gastos
+    total_gastos += n_gastos
+    area_num += 1
+
+peso_total_kb = total_gastos * tamano_gasto_kb
+
+print(f"Total de gastos: {total_gastos}")
+
+# Límites en KB
+gb_1_kb = 1024 * 1024
+gb_10_kb = 10240 * 1024
+
+if peso_total_kb < gb_1_kb:
+    print(f"El peso total del archivo es de {peso_total_kb} KB, se exportará en un solo archivo.")
+    print(f"Archivo exportado con nombre xpendit_informe_{n_areas}_areas_{primer_area_gastos}_gastos.xslx")
+elif peso_total_kb < gb_10_kb:
+    print(f"El peso total del archivo es de {peso_total_kb} KB, lo que supera el límite de 1 GB.")
+    correo = input("Por favor, ingresa un correo a donde se enviará el archivo:\nCorreo: ")
+    print(f"Archivo exportado con nombre xpendit_informe_{n_areas}_areas_{primer_area_gastos}_gastos.xslx")
+else:
+    print(f"El peso total del archivo es de {peso_total_kb} KB, lo que supera el límite de 10 GB.")
+    print("Por favor, contacta a soporte.")
 ```
 
 ---
@@ -876,38 +987,17 @@ while CONDICION_1:
 ---
 layout: default
 level: 2
-title: Ejemplo resuelto
-hideInToc: true
+title: Ejemplo avanzado
+hideInToc: false
 ---
 
-## Ejemplo resuelto
+# Ejemplo avanzado
 
-> Si queremos mostrar los N primeros múltiplos de 3 y 5, y cuando lleguemos a un numero par (al sumar ambos múltiplos), en vez de imprimir los múltiplos de 3 y 5,
-> imprimimos una cuenta regresiva desde ese número hasta el cero, para luego continuar con los siguientes múltiplos de 3 y 5, y mostrar la suma de los múltiplos de 3 al final?
+### Ejercicio: Aprobación de Gastos según Políticas
 
-```python
-# Obtener el numero de multiplos
-n = int(input())
-# Inicializamos contador y acumulador
-contador = 1
-suma = 0
+**Contexto:**
 
-# Mientras el contador sea menor o igual al numero de multiplos
-while contador <= n:
-    suma_multiplos = contador * 3 + contador * 5
-    # Si la suma de los multiplos es par
-    if suma_multiplos % 2 == 0:
-        # Mientras la variable 'suma_multiplos' sea mayor o igual a 0
-        while suma_multiplos >= 0:
-            print(suma_multiplos)
-            suma_multiplos -= 1
-    # Si el contador es impar
-    else:
-        print(contador * 3, contador * 5)
-        # Acumular la suma de los multiplos de 3
-    suma += contador * 3
-    contador += 1
-```
+En una empresa, recibes solicitudes de gastos de diferentes empleados. Cada solicitud tiene un monto, una categoría y un nivel de urgencia. Debes aprobar la mejor solicitud de cada empleado, priorizando primero la urgencia (mayor es mejor), luego el monto (menor es mejor), y finalmente la categoría (el orden de prioridad es: Viajes > Insumos > Alimentación).
 
 ---
 layout: default
@@ -916,42 +1006,23 @@ title: Ejemplo avanzado
 hideInToc: false
 ---
 
-# Ejemplo avanzado
-
-### Ejercicio: Negociaciones Avanzadas en Catan
-
-**Contexto:**
-
-En el juego de mesa "Catan", los jugadores negocian recursos con otros jugadores para avanzar en el juego. Supongamos que eres un jugador que quiere negociar ladrillos por trigo y madera. Tienes un número inicial de ladrillos y quieres obtener trigo y madera a cambio.
-Otros jugadores te ofrecerán trigo y madera a cambio de tus ladrillos, pero cada jugador tiene una tasa de cambio diferente.
-Tu objetivo es obtener la mayor cantidad de trigo y madera posible antes de quedarte sin ladrillos. Sin embargo, algunos jugadores son más difíciles de negociar y te pedirán que negocies varias veces antes de aceptar la oferta.
-
----
-layout: default
-level: 2
-title: Ejemplo avanzado
-hideInToc: true
----
-
 **Entradas:**
 
-- Un número entero `L` que representa la cantidad inicial de ladrillos que tienes.
-- Un número entero `N` que representa el número de jugadores con los que intentarás negociar.
-- `N` grupos de números (separados en lineas distintas). Cada grupo comienza con un número entero (primera linea) que indica cuántas veces debes negociar con ese jugador antes de que acepte.
-  Debes considerar solo la mejor negociación (la que te entregue más trigos y maderas siempre y cuando tengas los ladrillos para tomar la oferta)
-
-Para cada negociación, habrá tres números enteros: el primero representa la cantidad de ladrillos que el jugador quiere, el segundo representa la cantidad total de trigo y el tercero la cantidad total de madera que te ofrece a cambio.
-Importante: si no tienes suficientes ladrillos para aceptar una negociación en una oferta, debes saltártela.
+- Un número entero `N` que representa el número de empleados.
+- Para cada empleado:
+  - Un número entero que indica cuántas solicitudes de gasto presenta ese empleado.
+  - Para cada solicitud: tres datos: monto (entero), categoría (texto: "Viajes", "Insumos" o "Alimentación"), urgencia (entero, mayor es más urgente).
 
 **Salidas:**
 
-- Un mensaje que diga "Resultados de las negociaciones:".
-- Dos números enteros que representan la cantidad total de trigo y madera que obtuviste después de todas las negociaciones.
+- Por cada empleado, se debe imprimir "Solicitud aprobada:", seguido de una solicitud con los detalles de esta y del empleado que la presentó (empleado #, monto, categoría, urgencia).
+- Al final, se debe imprimir "Total gastado:", seguido del total gastado en todas las solicitudes aprobadas.
 
 **Restricciones:**
 
-- 1 <= L <= 100
-- 1 <= N <= 10
+- monto y urgencia son enteros positivos
+- categoría es un texto válido
+- Viajes > Insumos > Alimentación
 
 ---
 layout: default
@@ -962,31 +1033,48 @@ hideInToc: true
 
 **Ejemplo:**
 
-Entrada:
-
 ```text
-5
-2
-2
-2
-2
-1
-3
-1
-1
-1
-2
-1
-1
+¿Cuántos empleados hay? 2
+¿Cuántas solicitudes tiene el empleado #1? 2
+¿Cuál es el monto de la solicitud #1 del empleado #1? 500
+¿Cuál es la categoría de la solicitud #1 del empleado #1? Viajes
+¿Cuál es la urgencia de la solicitud #1 del empleado #1? 3
+¿Cuál es el monto de la solicitud #2 del empleado #1? 700
+¿Cuál es la categoría de la solicitud #2 del empleado #1? Insumos
+¿Cuál es la urgencia de la solicitud #2 del empleado #1? 2
+Solicitud aprobada: Empleado 1: 500 Viajes 3
+¿Cuántas solicitudes tiene el empleado #2? 3
+¿Cuál es el monto de la solicitud #1 del empleado #2? 400
+¿Cuál es la categoría de la solicitud #1 del empleado #2? Alimentación
+¿Cuál es la urgencia de la solicitud #1 del empleado #2? 3
+¿Cuál es el monto de la solicitud #2 del empleado #2? 300
+¿Cuál es la categoría de la solicitud #2 del empleado #2? Viajes
+¿Cuál es la urgencia de la solicitud #2 del empleado #2? 2
+¿Cuál es el monto de la solicitud #3 del empleado #2? 400
+¿Cuál es la categoría de la solicitud #3 del empleado #2? Insumos
+¿Cuál es la urgencia de la solicitud #3 del empleado #2? 3
+Solicitud aprobada: Empleado 2: 400 Insumos 3
+Total gastado: 900
 ```
 
-Salida:
+---
+layout: default
+level: 2
+title: Ejemplo avanzado
+hideInToc: true
+---
 
-```text
-Resultados de las negociaciones:
-3
-2
-```
+### Modelamiento y explicación
+
+En este problema, queremos aprobar la mejor solicitud de gasto para cada empleado según tres criterios, en orden de prioridad:
+
+1. **Urgencia**: Se prefiere la solicitud con mayor urgencia.
+2. **Monto**: Si hay empate en urgencia, se prefiere la de menor monto.
+3. **Categoría**: Si hay empate en urgencia y monto, se prefiere la categoría con mayor prioridad: Viajes > Insumos > Alimentación.
+
+Para resolverlo, para cada empleado leemos todas sus solicitudes y vamos guardando la mejor encontrada hasta el momento, comparando cada nueva solicitud con la mejor actual según los criterios anteriores.
+
+**Imprimimos el resultado de cada empleado inmediatamente después de encontrar su mejor solicitud.**
 
 ---
 layout: default
@@ -997,61 +1085,61 @@ hideInToc: true
 
 ### Solución:
 
-```python {2-3|5-7|9-11|12-21|20-22|22-36|38-45|47-50} {lines:true, maxHeight: '300px'}
-# Recibimos la cantidad inicial de ladrillos y el número de jugadores
-ladrillos = int(input())
-n_jugadores = int(input())
+```python {1-9|9-11|9-19|19-23|24-30|31-40|41-46|19,47|48-50|9,51|52-53|all}{lines:true, maxHeight: '450px'}
+# Leer la cantidad de empleados
+cantidad_empleados = int(input())
 
-# Inicializamos las variables para almacenar la cantidad total de trigo y madera
-total_trigo = 0
-total_madera = 0
+# Inicializar el total gastado en todas las solicitudes aprobadas
+suma_total_gastos = 0
 
-# Iteramos sobre cada jugador
-i = 0
-while i < n_jugadores:
-    # Recibimos la cantidad de veces que debemos negociar con el jugador
-    n_negociaciones = int(input())
-
-    # Inicializamos las variables para almacenar la mejor oferta del jugador
-    mejor_oferta_trigo = 0
-    mejor_oferta_madera = 0
-    mejor_oferta_ladrillos = 0
-
-    # Iteramos sobre cada oferta del jugador
-    j = 0
-    while j < n_negociaciones:
-        # Recibimos la oferta del jugador
-        ladrillos_jugador = int(input())
-        trigo = int(input())
-        madera = int(input())
-
-        # Verificamos si tenemos suficientes ladrillos para aceptar la oferta
-        if ladrillos >= ladrillos_jugador:
-            # Si la oferta es mejor que la anterior, la actualizamos
-            if trigo + madera > mejor_oferta_trigo + mejor_oferta_madera:
-                mejor_oferta_trigo = trigo
-                mejor_oferta_madera = madera
-                mejor_oferta_ladrillos = ladrillos_jugador
-
-        j += 1
-
-    # Actualizamos la cantidad total de trigo y madera
-    total_trigo += mejor_oferta_trigo
-    total_madera += mejor_oferta_madera
-
-    # Actualizamos la cantidad de ladrillos que nos quedan
-    ladrillos -= mejor_oferta_ladrillos
-
-    i += 1
-
-# Imprimimos los resultados
-print("Resultados de las negociaciones:")
-print(total_trigo)
-print(total_madera)
+# Procesar cada empleado uno por uno
+empleado_actual = 1
+while empleado_actual <= cantidad_empleados:
+    # Leer la cantidad de solicitudes de este empleado
+    cantidad_solicitudes = int(input(f"¿Cuántas solicitudes tiene el empleado #{empleado_actual}? "))
+    # Inicializar variables para la mejor solicitud encontrada
+    mejor_urgencia = -1
+    mejor_monto = 0
+    mejor_categoria = ""
+    mejor_prioridad_categoria = 0
+    # Procesar cada solicitud de este empleado
+    solicitud_actual = 0
+    while solicitud_actual < cantidad_solicitudes:
+        # Leer los datos de la solicitud
+        monto_solicitud = int(input(f"¿Cuál es el monto de la solicitud #{solicitud_actual + 1} del empleado #{empleado_actual}? "))
+        categoria_solicitud = input(f"¿Cuál es la categoría de la solicitud #{solicitud_actual + 1} del empleado #{empleado_actual}? ")
+        urgencia_solicitud = int(input(f"¿Cuál es la urgencia de la solicitud #{solicitud_actual + 1} del empleado #{empleado_actual}? "))
+        # Determinar la prioridad de la categoría
+        if categoria_solicitud == "Viajes":
+            prioridad_categoria = 3
+        elif categoria_solicitud == "Insumos":
+            prioridad_categoria = 2
+        else:
+            prioridad_categoria = 1
+        # Decidir si esta solicitud es mejor que la mejor encontrada hasta ahora
+        es_mejor = False
+        if urgencia_solicitud > mejor_urgencia:
+            es_mejor = True
+        elif urgencia_solicitud == mejor_urgencia:
+            if monto_solicitud < mejor_monto or mejor_urgencia == -1:
+                es_mejor = True
+            elif monto_solicitud == mejor_monto:
+                if prioridad_categoria > mejor_prioridad_categoria:
+                    es_mejor = True
+        # Si es mejor, actualizar los datos de la mejor solicitud
+        if es_mejor:
+            mejor_urgencia = urgencia_solicitud
+            mejor_monto = monto_solicitud
+            mejor_categoria = categoria_solicitud
+            mejor_prioridad_categoria = prioridad_categoria
+        solicitud_actual += 1
+    # Imprimir la mejor solicitud aprobada para este empleado
+    print(f"Empleado {empleado_actual}: {mejor_monto} {mejor_categoria} {mejor_urgencia}")
+    suma_total_gastos += mejor_monto
+    empleado_actual += 1
+# Imprimir el total gastado en todas las solicitudes aprobadas
+print(f"Total gastado: {suma_total_gastos}")
 ```
-
-Con las entradas dadas en el ejemplo, este código imprimirá `3` y `2` como salida además del mensaje
- `Resultados de las negociaciones:`.
 
 ---
 layout: center
@@ -1062,7 +1150,7 @@ hideInToc: true
 
 # Coming soon...
 
-En el último ejemplo, usamos un `while` para iterar sobre los jugadores, y otro `while` para iterar sobre las ofertas de cada jugador. Esto es un ejemplo de un ciclo anidado, que es un ciclo dentro de otro ciclo. Pero, ¿no sabíamos exactamente cuántas veces se iba a repetir el ciclo?
+En el último ejemplo, usamos un `while` para iterar sobre los empleados, y otro `while` para iterar sobre las solicitudes de cada empleado. Esto es un ejemplo de un ciclo anidado, que es un ciclo dentro de otro ciclo. Pero, ¿no sabíamos exactamente cuántas veces se iba a repetir el ciclo?
 ¿Es necesario repetir el ciclo infinitamente hasta que se cumpla la condición de término? ¿No podemos repetirlo un número específico de veces?
 
 Para eso el `for`, que comenzaremos a ver en la próxima clase.
