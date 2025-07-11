@@ -705,11 +705,11 @@ hideInToc: false
 
 <v-clicks>
 
-- Hasta que el usuario ingrese un número mayor que 10.
-- Hasta que el usuario haya ingresado un número par.
+- Hasta que el usuario ingrese un monto mayor que 10.
+- Hasta que el numero de filas de un reporte sea igual al numero de gastos.
 - Hasta que el texto ingresado por el usuario sea el valor esperado.
-- Hasta que el resultado de sumar dos números sea mayor que un numero
-- Hasta que el resultado de unir strings sea igual a otro string
+- Hasta que el resultado de sumar dos números sea mayor que un numero.
+- Hasta que el resultado de unir strings sea igual a otro string.
 </v-clicks>
 
 ---
@@ -751,7 +751,7 @@ hideInToc: true
 <iframe width="800" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=numero_objetivo%20%3D%2010%20%23%20por%20ejempl,%20en%20vez%20de%20int%28input%28%29%29%0Anumero_mostrado%20%3D%201%0A%0A%23%20Mientras%20el%20numero%20mostrado%20sea%20menor%20o%20igual%20al%20numero%20objetivo%0Awhile%20numero_mostrado%20%3C%3D%20numero_objetivo%3A%0A%20%20%20%20%23%20Mostrar%20el%20numero%20mostrado%0A%20%20%20%20print%28numero_mostrado%29%0A%20%20%20%20%23%20Aumentar%20el%20numero%20mostrado%20en%201%0A%20%20%20%20numero_mostrado%20%2B%3D%201%20%23%20Equivalente%20a%20numero_mostrado%20%3D%20numero_mostrado%20%2B%201&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=15&heapPrimitives=nevernest&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
 
 ---
-layout: two-cols
+layout: default
 level: 2
 title: While - más ejemplos
 hideInToc: true
@@ -780,7 +780,15 @@ while contador <= n:
     contador += 1
 ```
 
-::right::
+---
+layout: default
+level: 2
+title: While - más ejemplos
+hideInToc: true
+---
+
+# While
+## Ejemplos
 
 Y mostrar los N primeros pares de sumas de gastos de almuerzos ($300) y transporte ($500). Si la cantidad de gastos es par, mostrar ambos; si no, mostrar gastos alternativos: coffee breaks ($400) y estacionamiento ($600)?
 
@@ -794,6 +802,16 @@ while contador <= n:
         print(contador * 400, contador * 600)
     contador += 1
 ```
+
+---
+layout: default
+level: 2
+title: While - cuestionamiento
+hideInToc: true
+---
+
+# While
+## Ejemplos
 
 ❓ Ahora supongamos un ejemplo más complejo.
 
